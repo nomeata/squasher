@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Squasher</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://unpkg.com/chota@latest">
+<style>
+body > .container {
+  max-width: 720px;
+}
+</style>
+</head>
+<body>
+<main class="container">
+<h1><a href="/" style="color:#333;">Squasher!</a></h1>
+
+<p>
+This little service squashes your Github PR for you – useful when the maintainer expects you to squash them, but you are nowhere near your computer (or just lazy).
+</p>
+
+<p>
+Login via Github, paste the URL to the pull request, press the button, and Squasher will force-push a squashed commit to your branch.
+</p>
+
+<p>
+It uses the PR title and description for the commit message, so make sure it is up-to-date and complete before pressing the button.
+</p>
+
+<p>
+Force-pushing is a destructive operation, so be careful (and maybe convince the project's maintainer that they should not ask contributers to squash-merge the feature branches, and that they should simply use Github’s Squash-Merge feature, or use a merge queue like <a href="https://mergify.com/">Mergify</a>).
+</p>
+
+
+{% if user %}
+<p>Welcome back, @{{user}} (<a href="/logout">logout</a>).</p>
+<form method="POST" action="/squash">
+<p class="grouped">
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+<input type="text" name="pull_url" placeholder="http://github.com/owner/repo/pull/1234" autofocus/>
+<input type="submit" value="Squash"/>
+</p>
+</form>
+
+{% if steps %}
+<ul>
+{% for step in steps %}
+<li>{{ step }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% else %}
+<p>
+<form method="POST" action="/login">
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+<input type="submit" style="width:100%" value="Login and authorize with Github"/>
+</form>
+</p>
+{% endif %}
+
+<p>
+This service is provided by Joachim Breitner in the hope that it is useful to some, but without any promises. Report issues or contribute improvements at <a href="https://gitub.com/nomeata/squasher">github.com/nomeata/squasher</a>.
+</p>
+
+</main>
+</body>
+</html>
