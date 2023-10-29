@@ -1,0 +1,18 @@
+{
+    "dev": {
+        "app_function": "squasher.app",
+        "aws_region": "eu-central-1",
+        "profile_name": "squasher-deploy",
+        "project_name": "squasher",
+        "runtime": "python3.9",
+        "s3_bucket": "zappa-squasher",
+        "domain": "squasher.nomeata.de",
+        "certificate_arn": "arn:aws:acm:eu-central-1:569211034371:certificate/a83d1726-b827-4e08-aca4-23406c08e7e0",
+        "route53_enabled": false,
+        "keep_warm": "false",
+        "log_level": "INFO",
+        "exclude": ["boto*", "vendor"],
+        "memory_size": 512,
+        "timeout_seconds": 35
+    }
+}

@@ -35,7 +35,7 @@ Force-pushing is a destructive operation, so be careful (and maybe convince the 
 
 {% if user %}
 <p>Welcome back, @{{user}} (<a href="/logout">logout</a>).</p>
-<form method="POST" action="/squash">
+<form method="POST" action="/">
 <p class="grouped">
 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 <input type="text" name="pull_url" placeholder="http://github.com/owner/repo/pull/1234" autofocus/>

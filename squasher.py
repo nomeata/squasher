@@ -8,7 +8,7 @@ import re
 from markupsafe import Markup
 
 app = Flask(__name__)
-app.config.from_file("config.json", load=json.load)
+app.config.from_file("config.json", load=json.load, silent=True)
 csrf = CSRFProtect(app)
 
 oauth = OAuth(app)
@@ -36,7 +36,7 @@ def login():
 
 pr_re = re.compile(r"^https://github.com/(?P<owner>[^/]+)/(?P<repo>[^/]+)/pull/(?P<pr>[0-9]+)")
 
-@app.route("/squash", methods=["POST"])
+@app.route("/", methods=["POST"])
 def squash():
     steps = []
 
@@ -124,17 +124,20 @@ def callback():
     code = request.args.get("code")
     access_token = get_access_token(code)
     session["access_token"] = access_token
-    username = get_api("user")
-    session["username"] = username["login"]
     return redirect(url_for("index"))
 
 def get_user():
     if "access_token" in session:
-        user = get_api("user")
-        if user:
-            return user["login"]
-        else:
+        try:
+            user = get_api("user")
+            if user:
+                return user["login"]
+            else:
+                session.clear()
+        except Exception as e:
+            print(e)
             session.clear()
+            return
 
 def get_access_token(code):
     payload = {
