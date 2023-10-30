@@ -6,15 +6,34 @@
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://unpkg.com/chota@latest">
+<link rel="shortcut icon" href="{{ url_for('static', filename='icon.png') }}">
 <style>
 body > .container {
   max-width: 720px;
 }
+.logo {
+  flex: 1;
+  flex-direction: column;
+}
+
+.logo svg {
+  width: 100%;
+  max-width: 300px;
+}
+
+.logo h3 {
+  font-weight: 300;
+}
+
 </style>
 </head>
 <body>
 <main class="container">
-<h1><a href="/" style="color:#333;">Squasher!</a></h1>
+
+<div class="logo is-center is-vertical-align">
+<img width="40%" src="{{ url_for('static', filename='icon.png') }}" alt="">
+	<h3>Squasher!</h3>
+</div>
 
 <p>
 This little service squashes your Github PR for you – useful when the maintainer expects you to squash them, but you are nowhere near your computer (or just lazy).
@@ -61,7 +80,7 @@ Force-pushing is a destructive operation, so be careful (and maybe convince the 
 {% endif %}
 
 <p>
-This service is provided by Joachim Breitner in the hope that it is useful to some, but without any promises. Report issues or contribute improvements at <a href="https://gitub.com/nomeata/squasher">github.com/nomeata/squasher</a>.
+This service is provided by Joachim Breitner in the hope that it is useful to some, but without any promises. Report issues or contribute improvements at <a href="https://github.com/nomeata/squasher">github.com/nomeata/squasher</a>.
 </p>
 
 </main>
