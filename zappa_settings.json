@@ -4,7 +4,7 @@
         "aws_region": "eu-central-1",
         "profile_name": "squasher-deploy",
         "project_name": "squasher",
-        "runtime": "python3.9",
+        "runtime": "python3.11",
         "s3_bucket": "zappa-squasher",
         "domain": "squasher.nomeata.de",
         "certificate_arn": "arn:aws:acm:eu-central-1:569211034371:certificate/a83d1726-b827-4e08-aca4-23406c08e7e0",
